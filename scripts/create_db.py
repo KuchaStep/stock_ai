@@ -42,6 +42,34 @@ CREATE TABLE IF NOT EXISTS fundamentals (
 )
 """)
 
+##バッグテスト用のデータテーブル
+cur.execute("""
+CREATE TABLE IF NOT EXISTS backtest_summary (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_date TEXT,
+    test_days INTEGER,
+    rebalance_interval INTEGER,
+    top_n INTEGER,
+    win_rate REAL,
+    avg_return REAL,
+    total_return REAL,
+    max_drawdown REAL,
+    initial_capital REAL,
+    final_capital REAL
+)
+""")
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS backtest_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_date TEXT,
+    trade_date TEXT,
+    capital REAL,
+    benchmark REAL,
+    drawdown REAL
+)
+""")
+
 # 4. 【新規追加】データ結合を高速化するためのインデックス
 # codeとdateによる検索・結合クエリのパフォーマンスを最大化します
 cur.execute("CREATE INDEX IF NOT EXISTS idx_prices_code_date ON prices(code, date);")
