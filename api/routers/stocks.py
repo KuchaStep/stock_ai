@@ -2,7 +2,8 @@ from fastapi import APIRouter, HTTPException
 
 from api.services.stock_service import (
     get_stock_list,
-    get_stock
+    get_stock,
+    get_price_history
 )
 
 router = APIRouter(
@@ -28,3 +29,18 @@ def stock(code: str):
         )
 
     return result
+
+@router.get("/{code}/history")
+def stock_history(
+    code: str,
+    days: int = 365,
+    from_date: str | None = None,
+    to_date: str | None = None,
+    ):
+    return get_price_history(
+        code,
+        days=days,
+        from_date=from_date,
+        to_date=to_date,
+    )
+    
