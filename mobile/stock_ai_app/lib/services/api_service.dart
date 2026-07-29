@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:dio/dio.dart';
 import '../models/ranking_model.dart';
 
 class ApiService {
