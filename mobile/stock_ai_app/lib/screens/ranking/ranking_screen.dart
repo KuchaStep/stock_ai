@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../widgets/common/stock_card.dart';
 import '../../providers/ranking_provider.dart';
 
 class RankingScreen extends ConsumerWidget {
@@ -29,19 +29,9 @@ class RankingScreen extends ConsumerWidget {
             itemBuilder: (context, index) {
               final stock = stocks[index];
 
-              return ListTile(
-                leading: CircleAvatar(
-                  child: Text("${index + 1}"),
-                ),
-                title: Text(stock.name),
-                subtitle: Text(stock.code),
-                trailing: Text(
-                  "${stock.upProbability.toStringAsFixed(1)} %",
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              return StockCard(
+                stock: stock,
+                rank: index + 1,
               );
             },
           );
